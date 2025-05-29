@@ -4,28 +4,28 @@
  */
 package Model;
 
-
-import Controller.Conexao;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class HospitAll {
 
-    private final List<Paciente> pacientes;
+    private final PacienteDAO pacienteDAO;
     private final MedicoDAO medicoDAO; 
-    private final List<Consulta> todasConsultas;
+    private final ConsultaDAO consultaDAO; // ADICIONE ESTA LINHA
+    // private final List<Consulta> todasConsultas; // REMOVA ESTA LINHA
     private final String nomeHospital;
 
     public HospitAll(String nomeHospital) {
         this.nomeHospital = (nomeHospital != null && !nomeHospital.trim().isEmpty()) ? nomeHospital.trim() : "Hospital Central Padrão";
         this.medicoDAO = new MedicoDAO();
-        this.pacientes = new ArrayList<>();
-        this.todasConsultas = new ArrayList<>();
+        this.pacienteDAO = new PacienteDAO();
+        this.consultaDAO = new ConsultaDAO(); // ADICIONE: Instancia o ConsultaDAO
+        // this.todasConsultas = new ArrayList<>(); // REMOVA ESTA LINHA
     }
 
-    public boolean adicionarMedico(Medico medico) {
+    // Métodos de Medico e Paciente (como antes, usando seus DAOs)
+    public boolean adicionarMedico(Medico medico) { //...código como antes... 
         if (medico != null) {
             Optional<Medico> medicoExistente = medicoDAO.buscarMedicoPorCRM(medico.getCrm());
             if (medicoExistente.isEmpty()) {
@@ -39,78 +39,82 @@ public class HospitAll {
         System.out.println("Não foi possível adicionar o médico (objeto nulo).");
         return false;
     }
-
-    public Optional<Medico> buscaPorCRM(int crm) {
-        return medicoDAO.buscarMedicoPorCRM(crm);
-    }
-
-    public List<Medico> getMedicos() {
-        return medicoDAO.listarTodosMedicos();
-    }
-
-    public boolean adicionarPaciente(Paciente paciente) {
-        if (paciente != null && !this.pacientes.contains(paciente)) {
-            this.pacientes.add(paciente);
-            System.out.println("Paciente " + paciente.getNome() + " (CPF: " + paciente.getCpf() + ") adicionado (em memória) ao sistema " + this.nomeHospital + ".");
-            return true;
-        }
-        System.out.println("Não foi possível adicionar o paciente (Nulo ou CPF já cadastrado em memória).");
-        return false;
-    }
-
-    public Optional<Paciente> buscaPorCPF(String cpf) {
-        if (cpf == null || cpf.trim().isEmpty()) {
-            return Optional.empty();
-        }
-        return this.pacientes.stream()
-                   .filter(p -> cpf.equals(p.getCpf()))
-                   .findFirst();
-    }
-    
-    public List<Paciente> buscaPacientePorMedico(Medico medico) {
-        if (medico == null) {
-            return new ArrayList<>();
-        }
-        return this.pacientes.stream()
-                   .filter(p -> medico.equals(p.getMedico()))
-                   .collect(Collectors.toList());
-    }
-
-    public boolean agendarEregistrarConsulta(Consulta consulta) {
-        if (consulta != null && !this.todasConsultas.contains(consulta)) {
-            
-            boolean medicoValido = false;
-            Optional<Medico> medicoDaConsultaOpt = this.buscaPorCRM(consulta.getMedico().getCrm());
-            if (medicoDaConsultaOpt.isPresent() && medicoDaConsultaOpt.get().equals(consulta.getMedico())) {
-                medicoValido = true;
-            }
-
-            boolean pacienteValido = false;
-            Optional<Paciente> pacienteDaConsultaOpt = this.buscaPorCPF(consulta.getPaciente().getCpf());
-             if (pacienteDaConsultaOpt.isPresent() && pacienteDaConsultaOpt.get().equals(consulta.getPaciente())) {
-                pacienteValido = true;
-            }
-
-            if (medicoValido && pacienteValido) {
-                this.todasConsultas.add(consulta);
-                consulta.registrarConsulta(); 
+    public Optional<Medico> buscaPorCRM(int crm) { return medicoDAO.buscarMedicoPorCRM(crm); }
+    public List<Medico> getMedicos() { return medicoDAO.listarTodosMedicos(); }
+    public boolean adicionarPaciente(Paciente paciente) { //...código como antes... 
+        if (paciente != null) {
+            Optional<Paciente> pacienteExistente = pacienteDAO.buscarPacientePorCPF(paciente.getCpf());
+            if (pacienteExistente.isEmpty()) {
+                pacienteDAO.adicionarPaciente(paciente); 
                 return true;
             } else {
-                 if (!medicoValido) System.out.println("Falha ao agendar: Médico da consulta não encontrado ou não corresponde ao cadastrado no sistema.");
-                 if (!pacienteValido) System.out.println("Falha ao agendar: Paciente da consulta não encontrado ou não corresponde ao cadastrado no sistema.");
+                System.out.println("Não foi possível adicionar o paciente: CPF " + paciente.getCpf() + " já cadastrado no BD.");
+                return false;
             }
-        } else {
-            if (consulta == null) System.out.println("Falha ao agendar: objeto consulta nulo.");
-            else System.out.println("Falha ao agendar: Consulta já registrada ou dados inválidos.");
         }
+        System.out.println("Não foi possível adicionar o paciente (objeto nulo).");
         return false;
     }
+    public Optional<Paciente> buscaPorCPF(String cpf) { return pacienteDAO.buscarPacientePorCPF(cpf); }
+    public List<Paciente> getPacientes() { return pacienteDAO.listarTodosPacientes(); }
+     public List<Paciente> buscaPacientePorMedico(Medico medico) {
+        if (medico == null) return new ArrayList<>();
+        System.out.println("Aviso: buscaPacientePorMedico em HospitAll ainda filtra em memória após buscar todos do BD.");
+        List<Paciente> todosPacientes = getPacientes();
+        List<Paciente> pacientesDoMedico = new ArrayList<>();
+        for(Paciente p : todosPacientes) {
+            if(p.getMedico() != null && p.getMedico().equals(medico)) {
+                pacientesDoMedico.add(p);
+            }
+        }
+        return pacientesDoMedico;
+    }
 
-    public void demonstrarBusca(String cpf, int crm) {
+
+    // Métodos de Consulta (AGORA USANDO consultaDAO)
+    public boolean agendarEregistrarConsulta(Consulta consulta) {
+        if (consulta == null || consulta.getPaciente() == null || consulta.getMedico() == null) {
+             System.out.println("Falha ao agendar: Consulta, paciente ou médico nulos.");
+            return false;
+        }
+
+        // Verifica se o médico e o paciente da consulta existem no BD
+        boolean medicoValido = this.buscaPorCRM(consulta.getMedico().getCrm())
+                                   .map(m -> m.equals(consulta.getMedico()))
+                                   .orElse(false);
+
+        boolean pacienteValido = this.buscaPorCPF(consulta.getPaciente().getCpf())
+                                     .map(p -> p.equals(consulta.getPaciente()))
+                                     .orElse(false);
+
+        if (medicoValido && pacienteValido) {
+            Consulta consultaSalva = consultaDAO.adicionarConsulta(consulta);
+            if (consultaSalva != null && consultaSalva.getIdConsulta() > 0) {
+                // A consulta no objeto original já teve seu ID atualizado pelo DAO.
+                // O método registrarConsulta pode ser chamado para atualizar listas em memória de Medico/Paciente, se essa lógica for mantida.
+                consulta.registrarConsulta(); // Para manter a lógica de adicionar aos históricos em memória dos objetos
+                return true;
+            } else {
+                System.out.println("Falha ao salvar consulta no banco de dados.");
+                return false;
+            }
+        } else {
+             if (!medicoValido) System.out.println("Falha ao agendar: Médico da consulta (CRM "+consulta.getMedico().getCrm()+") não encontrado ou dados não correspondem ao BD.");
+             if (!pacienteValido) System.out.println("Falha ao agendar: Paciente da consulta (CPF "+consulta.getPaciente().getCpf()+") não encontrado ou dados não correspondem ao BD.");
+            return false;
+        }
+    }
+
+    public List<Consulta> getTodasConsultas() {
+        return consultaDAO.listarTodasConsultas();
+    }
+    
+    // Métodos restantes (demonstrarBusca, gerenciar, getNomeHospital)
+    public void demonstrarBusca(String cpf, int crm) { //...código como antes...
         System.out.println("\n--- DEMONSTRAÇÃO DE BUSCAS ---");
         buscaPorCPF(cpf).ifPresentOrElse(
-            p -> System.out.println("Busca Paciente CPF '" + cpf + "': Encontrado (em memória) -> " + p.getNome()),
-            () -> System.out.println("Busca Paciente CPF '" + cpf + "': Não encontrado (em memória).")
+            p -> System.out.println("Busca Paciente CPF '" + cpf + "': Encontrado (no BD) -> " + p.getNome() + " ("+p.getTipoPaciente()+")"),
+            () -> System.out.println("Busca Paciente CPF '" + cpf + "': Não encontrado (no BD).")
         );
 
         buscaPorCRM(crm).ifPresentOrElse(
@@ -119,20 +123,6 @@ public class HospitAll {
         );
          System.out.println("------------------------------\n");
     }
-
-    public void gerenciar() {
-        System.out.println("Sistema de Gerenciamento " + this.nomeHospital + " - Acesso Restrito.");
-    }
-
-    public List<Paciente> getPacientes() {
-        return new ArrayList<>(pacientes);
-    }
-
-    public List<Consulta> getTodasConsultas() {
-        return new ArrayList<>(todasConsultas);
-    }
-
-    public String getNomeHospital() {
-        return nomeHospital;
-    }
+    public void gerenciar() { System.out.println("Sistema de Gerenciamento " + this.nomeHospital + " - Acesso Restrito."); }
+    public String getNomeHospital() { return nomeHospital; }
 }

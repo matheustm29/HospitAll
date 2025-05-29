@@ -4,7 +4,6 @@
  */
 package Controller;
 
-
 import Model.HospitAll;
 import Model.Medico;
 import Model.Paciente;
@@ -16,106 +15,88 @@ import Model.GeradorRelatorios;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 public class Main {
 
     public static void main(String[] args) {
-
         System.out.println("==================================================");
         System.out.println("      INICIANDO SIMULAÇÃO - SISTEMA HOSPITALAR    ");
-        System.out.println("         (Médicos no BD, outros em memória)       ");
+        System.out.println("         (TODAS AS ENTIDADES NO BD)       ");
         System.out.println("==================================================");
 
-        HospitAll meuHospital = new HospitAll("Hospital Vida & Saúde Tech");
+        HospitAll meuHospital = new HospitAll("Hospital Cura Total");
         GeradorRelatorios relatorios = new GeradorRelatorios();
 
         System.out.println("\n----- 1. Cadastrando Médicos (Banco de Dados) -----");
         Medico drHouse = new Medico("Gregory House", 12345, "Diagnóstico", 38);
         Medico drWilson = new Medico("James Wilson", 54321, "Oncologia", 42);
-        Medico drChase = new Medico("Robert Chase", 67890, "Cirurgia Intensiva", 35);
-
         meuHospital.adicionarMedico(drHouse);
         meuHospital.adicionarMedico(drWilson);
-        meuHospital.adicionarMedico(drChase);
-
-        System.out.println("\nTentando adicionar Dr. House (CRM 12345) novamente...");
-        meuHospital.adicionarMedico(new Medico("G. House Duplicado", 12345, "Nefrologia", 40)); 
         
-        System.out.println("\n----- Listando Médicos do Banco de Dados -----");
-        List<Medico> medicosDoSistema = meuHospital.getMedicos();
-        if (medicosDoSistema.isEmpty()) {
-            System.out.println("Nenhum médico cadastrado no banco de dados.");
-        } else {
-            medicosDoSistema.forEach(m -> System.out.println("BD: Dr(a). " + m.getNome() + ", CRM: " + m.getCrm()));
+        System.out.println("\n----- 2. Cadastrando Pacientes (Banco de Dados) -----");
+        // Para garantir que temos os objetos corretos do BD (com médico associado corretamente)
+        // Buscamos os médicos recém-criados ou já existentes
+        Medico medicoParaJoao = meuHospital.buscaPorCRM(12345).orElse(null);
+        Medico medicoParaMaria = meuHospital.buscaPorCRM(54321).orElse(null);
+
+        if (medicoParaJoao == null || medicoParaMaria == null) {
+            System.err.println("ERRO CRÍTICO: Médicos base para pacientes não encontrados no BD. Abortando.");
+            return;
         }
 
-        System.out.println("\n----- Buscando Médicos Específicos no BD -----");
-        meuHospital.buscaPorCRM(54321).ifPresentOrElse(
-            m -> System.out.println("Busca CRM 54321: Encontrado Dr(a). " + m.getNome()),
-            () -> System.out.println("Busca CRM 54321: Médico não encontrado.")
-        );
-        meuHospital.buscaPorCRM(11111).ifPresentOrElse(
-            m -> System.out.println("Busca CRM 11111: Encontrado Dr(a). " + m.getNome()),
-            () -> System.out.println("Busca CRM 11111: Médico não encontrado (esperado).")
-        );
-
-
-        System.out.println("\n----- 2. Cadastrando Pacientes (Em Memória) -----");
-        Paciente joao = new PacienteCronico("João das Neves", "101.202.303-44", 58, drHouse, "Lúpus", "Imunossupressores");
-        Paciente maria = new PacienteInfeccioso("Maria Clara", "505.606.707-88", 30, drChase, "Dengue Hemorrágica", LocalDate.of(2025, 5, 20));
-        Paciente pedro = new PacienteTraumatico("Pedro Álvares", "404.505.606-77", 25, drChase, "Politrauma (acidente)", LocalDate.of(2025, 5, 10));
+        Paciente joao = new PacienteCronico("João da Silva", "111.222.333-00", 60, medicoParaJoao, "Hipertensão Severa", "Controle de Pressão");
+        Paciente maria = new PacienteInfeccioso("Maria Oliveira", "222.333.444-00", 35, medicoParaMaria, "Pneumonia", LocalDate.of(2025, 5, 20));
+        ((PacienteInfeccioso)maria).setEmIsolamento(true);
         
         meuHospital.adicionarPaciente(joao);
         meuHospital.adicionarPaciente(maria);
-        meuHospital.adicionarPaciente(pedro);
 
-        System.out.println("\n----- 3. Atividades Médicas (Dr. Chase) -----");
-        drChase.associarEstagiario("Dr. Foreman");
-        drChase.listarEstagiarios();
+        System.out.println("\n----- Listando Pacientes do Banco de Dados -----");
+        meuHospital.getPacientes().forEach(p -> 
+            System.out.println("BD: " + p.getNome() + ", CPF: " + p.getCpf() + ", Tipo: " + p.getTipoPaciente() + 
+            (p.getMedico() != null ? ", Médico: Dr(a). " + p.getMedico().getNome() : ", Médico: N/A"))
+        );
 
-
-        System.out.println("\n----- 4. Agendando Consultas (Médico do BD, Paciente da Memória) -----");
+        System.out.println("\n----- 4. Agendando Consultas (Agora no BD) -----");
         LocalDate hoje = LocalDate.now();
-        Consulta c1 = new Consulta(hoje.plusDays(1), "Acompanhamento Lúpus", joao, drHouse);
-        Consulta c2 = new Consulta(hoje.plusDays(2), "Monitoramento Dengue", maria, drChase);
-        Consulta c3 = new Consulta(hoje.plusDays(7), "Reavaliação Pós-trauma", pedro, drChase);
-        // Consulta com médico que não existe no BD para teste
-        Medico drFantasma = new Medico("Dr. Fantasma", 77777, "Inexistente", 0);
-        Consulta cFantasma = new Consulta(hoje.plusDays(3), "Consulta Teste", joao, drFantasma);
+        
+        // Buscamos os pacientes do BD para garantir que temos as instâncias corretas
+        Paciente joaoDoBd = meuHospital.buscaPorCPF("111.222.333-00").orElse(null);
+        Paciente mariaDoBd = meuHospital.buscaPorCPF("222.333.444-00").orElse(null);
+        Medico drHouseDoBd = meuHospital.buscaPorCRM(12345).orElse(null); // drHouse já está no BD
 
-
-        meuHospital.agendarEregistrarConsulta(c1);
-        meuHospital.agendarEregistrarConsulta(c2);
-        meuHospital.agendarEregistrarConsulta(c3);
-        System.out.println("\nTentando agendar consulta com médico inexistente no BD...");
-        meuHospital.agendarEregistrarConsulta(cFantasma);
-
-
-        System.out.println("\n----- 5. Atividades de Pacientes -----");
-        joao.verHistorico();
-        maria.pedirReceita("Hidratação Venosa e Repouso", "Contínuo");
-        if (maria instanceof PacienteInfeccioso) {
-             ((PacienteInfeccioso) maria).setEmIsolamento(false); 
+        if (joaoDoBd != null && drHouseDoBd != null) {
+            Consulta c1 = new Consulta(hoje.plusDays(15), "Revisão Hipertensão", joaoDoBd, drHouseDoBd);
+            meuHospital.agendarEregistrarConsulta(c1);
+            System.out.println("Consulta c1 agendada com ID do BD: " + c1.getIdConsulta());
+        } else {
+            System.out.println("Não foi possível agendar c1: João ou Dr. House não encontrados no BD como esperado.");
         }
 
+        if (mariaDoBd != null && medicoParaMaria != null) { // usando medicoParaMaria que é o mesmo que drWilson
+             Consulta c2 = new Consulta(hoje.plusDays(20), "Acompanhamento Pneumonia", mariaDoBd, medicoParaMaria);
+             meuHospital.agendarEregistrarConsulta(c2);
+             System.out.println("Consulta c2 agendada com ID do BD: " + c2.getIdConsulta());
+        } else {
+            System.out.println("Não foi possível agendar c2: Maria ou Dr. Wilson não encontrados no BD como esperado.");
+        }
+        
+        System.out.println("\n----- Listando Todas as Consultas do BD -----");
+        List<Consulta> consultasDoSistema = meuHospital.getTodasConsultas();
+        if (consultasDoSistema.isEmpty()) {
+            System.out.println("Nenhuma consulta encontrada no banco de dados.");
+        } else {
+            consultasDoSistema.forEach(c -> 
+                System.out.println("BD Consulta ID: " + c.getIdConsulta() + " Data: " + c.getData() +
+                                   " Pac: " + c.getPaciente().getNome() + " Med: " + c.getMedico().getNome())
+            );
+        }
 
-        System.out.println("\n----- 6. Verificando Agendas dos Médicos -----");
-        drHouse.verAgenda();
-        drChase.verAgenda();
-
-        System.out.println("\n----- 7. Demonstração de Buscas Combinadas -----");
-        meuHospital.demonstrarBusca(joao.getCpf(), drHouse.getCrm()); // Paciente em memória, Médico no BD
-        meuHospital.demonstrarBusca("000.111.222-33", 999000); // Ambos inexistentes
-
-
-        System.out.println("\n----- 8. Gerando Relatório Final -----");
+        System.out.println("\n----- 8. Gerando Relatório Final (Com todas as entidades do BD) -----");
         relatorios.gerarRelatorioGeral(meuHospital);
-
 
         System.out.println("==================================================");
         System.out.println("                 SIMULAÇÃO FINALIZADA             ");
         System.out.println("==================================================");
     }
 }
-

@@ -5,22 +5,19 @@
 package Model; // Ou Model.dao
 
 import Controller.Conexao;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional; // Para o método de busca
+import java.util.Optional;
 
 public class MedicoDAO {
 
-    /**
-     * Adiciona um novo médico ao banco de dados.
-     * @param medico O objeto Medico a ser adicionado.
-     */
     public void adicionarMedico(Medico medico) {
-        String sql = "INSERT INTO medicos (crm, nome, especialidade, carga_horaria) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO medico (crm, nome, especialidade, carga_horaria) VALUES (?, ?, ?, ?)"; // Tabela "medico"
         Connection conn = null;
         PreparedStatement pstmt = null;
 
@@ -32,26 +29,20 @@ public class MedicoDAO {
             pstmt.setString(3, medico.getEspecialidade());
             pstmt.setInt(4, medico.getCargaHoraria());
             pstmt.executeUpdate();
-            System.out.println("Médico " + medico.getNome() + " adicionado com sucesso ao BD!");
+            System.out.println("Médico " + medico.getNome() + " adicionado com sucesso ao BD (tabela medico)!");
         } catch (SQLException e) {
-            System.err.println("Erro ao adicionar médico ao BD: " + e.getMessage());
-            // Você pode querer lançar uma exceção customizada aqui
+            System.err.println("Erro ao adicionar médico ao BD (tabela medico): " + e.getMessage());
         } finally {
             Conexao.fecharConexao(conn, pstmt);
         }
     }
 
-    /**
-     * Busca um médico pelo CRM.
-     * @param crm O CRM do médico a ser buscado.
-     * @return Um Optional contendo o Medico se encontrado, ou Optional.empty() caso contrário.
-     */
     public Optional<Medico> buscarMedicoPorCRM(int crm) {
-        String sql = "SELECT nome, especialidade, carga_horaria FROM medicos WHERE crm = ?";
+        String sql = "SELECT nome, especialidade, carga_horaria FROM medico WHERE crm = ?"; // Tabela "medico"
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        Medico medico = null;
+        Medico medicoEncontrado = null;
 
         try {
             conn = Conexao.getConexao();
@@ -63,23 +54,19 @@ public class MedicoDAO {
                 String nome = rs.getString("nome");
                 String especialidade = rs.getString("especialidade");
                 int cargaHoraria = rs.getInt("carga_horaria");
-                medico = new Medico(nome, crm, especialidade, cargaHoraria);
+                medicoEncontrado = new Medico(nome, crm, especialidade, cargaHoraria);
             }
         } catch (SQLException e) {
-            System.err.println("Erro ao buscar médico por CRM: " + e.getMessage());
+            System.err.println("Erro ao buscar médico por CRM (tabela medico): " + e.getMessage());
         } finally {
             Conexao.fecharConexao(conn, pstmt, rs);
         }
-        return Optional.ofNullable(medico);
+        return Optional.ofNullable(medicoEncontrado);
     }
 
-    /**
-     * Lista todos os médicos cadastrados.
-     * @return Uma lista de objetos Medico.
-     */
     public List<Medico> listarTodosMedicos() {
-        String sql = "SELECT crm, nome, especialidade, carga_horaria FROM medicos ORDER BY nome";
-        List<Medico> medicos = new ArrayList<>();
+        String sql = "SELECT crm, nome, especialidade, carga_horaria FROM medico ORDER BY nome"; // Tabela "medico"
+        List<Medico> listaMedicos = new ArrayList<>();
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -94,17 +81,25 @@ public class MedicoDAO {
                 String nome = rs.getString("nome");
                 String especialidade = rs.getString("especialidade");
                 int cargaHoraria = rs.getInt("carga_horaria");
-                medicos.add(new Medico(nome, crm, especialidade, cargaHoraria));
+                listaMedicos.add(new Medico(nome, crm, especialidade, cargaHoraria));
             }
         } catch (SQLException e) {
-            System.err.println("Erro ao listar médicos: " + e.getMessage());
+            System.err.println("Erro ao listar médicos (tabela medico): " + e.getMessage());
         } finally {
             Conexao.fecharConexao(conn, pstmt, rs);
         }
-        return medicos;
+        return listaMedicos;
     }
+    
+    // Se você tiver métodos de ATUALIZAR e REMOVER, lembre-se de alterar o nome da tabela neles também:
+    // Exemplo:
+    // public void atualizarMedico(Medico medico) {
+    //     String sql = "UPDATE medico SET nome = ?, especialidade = ?, carga_horaria = ? WHERE crm = ?";
+    //     // ... restante do código ...
+    // }
 
-    // TODO: Implementar métodos para atualizarMedico e removerMedico
-    // public void atualizarMedico(Medico medico) { ... }
-    // public void removerMedico(int crm) { ... }
+    // public void removerMedico(int crm) {
+    //     String sql = "DELETE FROM medico WHERE crm = ?";
+    //     // ... restante do código ...
+    // }
 }
