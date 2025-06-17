@@ -256,7 +256,7 @@ public void cadEst() throws PerEstException {
 					JOptionPane.YES_NO_OPTION
 				);
 			if(resp == 0){
-				System.exit(0);	
+				this.dispose();
 			}
     }    
     
