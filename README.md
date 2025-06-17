@@ -1,4 +1,7 @@
 # 🏥 HospitAll - Sistema de Gerenciamento Hospitalar
+<p align="center">
+  <img src="banner.jpeg" alt="HospitAll Banner" width="50%">
+</p>
 
 HospitAll é um sistema desenvolvido com foco na otimização das operações administrativas de unidades de saúde. A aplicação centraliza o cadastro e controle de **pacientes**, **médicos** e **estagiários**, promovendo uma gestão eficiente e moderna por meio de um **Prontuário Eletrônico** simples e funcional.
 
@@ -21,7 +24,6 @@ HospitAll é um sistema desenvolvido com foco na otimização das operações ad
 ## 🧩 Tecnologias Utilizadas
 
 - **Java** (POO)
-- **Swing** (Interface Gráfica)
 - **NetBeans** (IDE)
 - **PostgreSQL** (Banco de Dados)
 
@@ -34,12 +36,10 @@ O desenvolvimento do sistema seguiu as seguintes etapas:
 3. Implementação com base em **boas práticas de desenvolvimento**.
 4. Testes e validações das funcionalidades.
 
-## 📸 Capturas de Tela
+## 🎥 Demonstração
 
-> *(Adicione aqui screenshots do sistema, se possível)*
+Confira a demonstração completa do sistema HospitAll no vídeo abaixo:
 
-## 🧪 Como Executar
+🔗 [Clique aqui para assistir no YouTube](https://www.youtube.com/watch?v=SEU_LINK_AQUI)
 
-1. Clone este repositório:
-   ```bash
-   git clone https://github.com/seu-usuario/hospitall.git
+
