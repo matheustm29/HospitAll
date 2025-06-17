@@ -47,45 +47,40 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="rotCrm" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="cxCrm" min="-2" pref="118" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="rotMenuMed" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="btCadMed" max="32767" attributes="0"/>
-                                  <Component id="btConsMed" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace pref="36" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="btDelMed" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btAltMed" alignment="1" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                      </Group>
-                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                  </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Component id="btSair" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="btConsMed" max="32767" attributes="0"/>
+                          <Component id="btImpMed" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="21" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="btAltMed" pref="171" max="32767" attributes="0"/>
+                          <Component id="btDelMed" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              <Component id="btImpMed" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="113" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="rotMenuMed" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="rotCrm" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="cxCrm" max="32767" attributes="0"/>
+                          <Component id="btCadMed" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+              <EmptySpace min="-2" pref="117" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -95,22 +90,22 @@
               <Component id="rotMenuMed" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="rotCrm" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="cxCrm" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="rotCrm" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+              <Component id="btCadMed" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btCadMed" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btConsMed" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btAltMed" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btConsMed" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btImpMed" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btDelMed" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="btImpMed" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="47" max="32767" attributes="0"/>
+              <EmptySpace pref="53" max="32767" attributes="0"/>
               <Component id="btSair" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -141,7 +136,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI Semibold" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="CONSULTA MEDICO"/>
+        <Property name="text" type="java.lang.String" value="CONSULTAR MEDICO"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btConsMedActionPerformed"/>
@@ -152,7 +147,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI Semibold" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="ALTERA SALARIO"/>
+        <Property name="text" type="java.lang.String" value="ALTERAR SALARIO"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btAltMedActionPerformed"/>
@@ -182,7 +177,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI Semibold" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="APRESENTA MEDICOS"/>
+        <Property name="text" type="java.lang.String" value="APRESENTAR MEDICOS"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btImpMedActionPerformed"/>
@@ -193,7 +188,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI Semibold" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Cadastrar Medico"/>
+        <Property name="text" type="java.lang.String" value="CADASTRAR MEDICO"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCadMedActionPerformed"/>

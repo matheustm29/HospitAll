@@ -17,7 +17,44 @@ public class PrincipalP extends javax.swing.JFrame {
 
     public PrincipalP() {
         initComponents();
+        adicionarAcoesAosMenus();
     }
+    private void adicionarAcoesAosMenus() {
+    
+    menuPa.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            
+            IntPaciente.getIntPaciente().setVisible(true);
+        }
+    });
+
+    menuMe.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            
+            IntMedico.getIntMedico().setVisible(true);
+        }
+    });
+
+    menuEst.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            // Abre a tela de gerenciamento de estagiários
+            IntEstagiario.getIntEstagiario().setVisible(true);
+        }
+    });
+
+    menuSair.addMenuListener(new javax.swing.event.MenuListener() {
+        public void menuSelected(javax.swing.event.MenuEvent evt) {
+
+            int resposta = javax.swing.JOptionPane.showConfirmDialog(null, "Deseja realmente sair da aplicação?", "Sair", javax.swing.JOptionPane.YES_NO_OPTION);
+            if (resposta == javax.swing.JOptionPane.YES_OPTION) {
+                System.exit(0);
+            }
+        }
+ 
+        public void menuDeselected(javax.swing.event.MenuEvent evt) {}
+        public void menuCanceled(javax.swing.event.MenuEvent evt) {}
+    });
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -29,110 +66,65 @@ public class PrincipalP extends javax.swing.JFrame {
     private void initComponents() {
 
         rotMenu = new javax.swing.JLabel();
-        rotEscolha = new javax.swing.JLabel();
-        btPac = new javax.swing.JButton();
-        btMed = new javax.swing.JButton();
-        btEst = new javax.swing.JButton();
-        btSair = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        menuPri = new javax.swing.JMenu();
+        menuPa = new javax.swing.JMenuItem();
+        menuMe = new javax.swing.JMenuItem();
+        menuEst = new javax.swing.JMenuItem();
+        menuSair = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        rotMenu.setFont(new java.awt.Font("Segoe UI Semibold", 1, 36)); // NOI18N
-        rotMenu.setText("MENU");
+        rotMenu.setFont(new java.awt.Font("Serif", 3, 48)); // NOI18N
+        rotMenu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        rotMenu.setText("HospitAll");
 
-        rotEscolha.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
-        rotEscolha.setText("ESCOLHA UMA OPÇÃO");
+        menuPri.setText("Menu");
 
-        btPac.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
-        btPac.setText("PACIENTE");
-        btPac.addActionListener(new java.awt.event.ActionListener() {
+        menuPa.setText("Paciente");
+        menuPa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btPacActionPerformed(evt);
+                menuPaActionPerformed(evt);
             }
         });
+        menuPri.add(menuPa);
 
-        btMed.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
-        btMed.setText("MEDICO");
-        btMed.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btMedActionPerformed(evt);
-            }
-        });
+        menuMe.setText("Medico");
+        menuPri.add(menuMe);
 
-        btEst.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
-        btEst.setText("ESTAGIARIO");
-        btEst.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btEstActionPerformed(evt);
-            }
-        });
+        menuEst.setText("Estagiario");
+        menuPri.add(menuEst);
 
-        btSair.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        btSair.setText("SAIR");
-        btSair.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btSairActionPerformed(evt);
-            }
-        });
+        jMenuBar1.add(menuPri);
+
+        menuSair.setText("Sair");
+        jMenuBar1.add(menuSair);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(rotEscolha)
-                .addGap(157, 157, 157))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(btPac)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btMed, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(61, 61, 61)
-                .addComponent(btEst)
-                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(235, 235, 235)
-                .addComponent(rotMenu)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(142, 142, 142)
+                .addComponent(rotMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(166, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(103, 103, 103)
                 .addComponent(rotMenu)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rotEscolha)
-                .addGap(77, 77, 77)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btPac)
-                    .addComponent(btMed)
-                    .addComponent(btEst))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
-                .addComponent(btSair)
-                .addContainerGap())
+                .addContainerGap(128, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSairActionPerformed
-        sair();
-    }//GEN-LAST:event_btSairActionPerformed
-
-    private void btPacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPacActionPerformed
-        IntPaciente.getIntPaciente().setVisible(true);
-    }//GEN-LAST:event_btPacActionPerformed
-
-    private void btMedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMedActionPerformed
-        IntMedico.getIntMedico().setVisible(true);
-    }//GEN-LAST:event_btMedActionPerformed
-
-    private void btEstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEstActionPerformed
-        IntEstagiario.getIntEstagiario().setVisible(true);
-    }//GEN-LAST:event_btEstActionPerformed
+    private void menuPaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuPaActionPerformed
 
         public void sair(){
 		int resp = JOptionPane.showConfirmDialog(
@@ -183,11 +175,12 @@ public class PrincipalP extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btEst;
-    private javax.swing.JButton btMed;
-    private javax.swing.JButton btPac;
-    private javax.swing.JButton btSair;
-    private javax.swing.JLabel rotEscolha;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem menuEst;
+    private javax.swing.JMenuItem menuMe;
+    private javax.swing.JMenuItem menuPa;
+    private javax.swing.JMenu menuPri;
+    private javax.swing.JMenu menuSair;
     private javax.swing.JLabel rotMenu;
     // End of variables declaration//GEN-END:variables
 }

@@ -61,7 +61,7 @@ public class IntEstagiario extends javax.swing.JFrame {
         rotCpf.setText("CPF:");
 
         btConsEst.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        btConsEst.setText("CONSULTA ESTAGIARIO");
+        btConsEst.setText("CONSULTAR ESTAGIARIO");
         btConsEst.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btConsEstActionPerformed(evt);
@@ -69,7 +69,7 @@ public class IntEstagiario extends javax.swing.JFrame {
         });
 
         btAltEst.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        btAltEst.setText("ALTERA PERIODO");
+        btAltEst.setText("ALTERAR PERIODO");
         btAltEst.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAltEstActionPerformed(evt);
@@ -77,7 +77,7 @@ public class IntEstagiario extends javax.swing.JFrame {
         });
 
         btDelEst.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        btDelEst.setText("DELETA ESTAGIARIO");
+        btDelEst.setText("DELETAR ESTAGIARIO");
         btDelEst.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btDelEstActionPerformed(evt);
@@ -92,7 +92,7 @@ public class IntEstagiario extends javax.swing.JFrame {
         });
 
         btImpEst.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        btImpEst.setText("APRESENTA ESTAGIARIOS");
+        btImpEst.setText("APRESENTAR ESTAGIARIOS");
         btImpEst.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btImpEstActionPerformed(evt);
@@ -100,7 +100,7 @@ public class IntEstagiario extends javax.swing.JFrame {
         });
 
         btnCadEst.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        btnCadEst.setText("Cadastrar Estagiario");
+        btnCadEst.setText("CADASTRAR ESTAGIARIO");
         btnCadEst.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCadEstActionPerformed(evt);
@@ -125,37 +125,34 @@ public class IntEstagiario extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btDelEst, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btImpEst))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btConsEst)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btAltEst, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(16, 16, 16))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(rotCpf)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(cxCpf, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(btnCadEst)))
-                .addGap(138, 138, 138))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btImpEst, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btConsEst, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btDelEst, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+                    .addComponent(btAltEst, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(266, 266, 266)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btSair))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(100, 100, 100)
-                        .addComponent(rotMenuEst)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(rotCpf)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cxCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(100, 100, 100)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btnCadEst)
+                                    .addComponent(rotMenuEst))))
+                        .addGap(0, 105, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,20 +160,20 @@ public class IntEstagiario extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addComponent(rotMenuEst)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rotCpf)
                     .addComponent(cxCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addComponent(btnCadEst)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btConsEst)
                     .addComponent(btAltEst))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btDelEst)
-                    .addComponent(btImpEst))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                    .addComponent(btImpEst)
+                    .addComponent(btDelEst))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                 .addComponent(btSair)
                 .addContainerGap())
         );

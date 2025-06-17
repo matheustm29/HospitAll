@@ -60,7 +60,7 @@ public class IntMedico extends javax.swing.JFrame {
         rotCrm.setText("CRM:");
 
         btConsMed.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        btConsMed.setText("CONSULTA MEDICO");
+        btConsMed.setText("CONSULTAR MEDICO");
         btConsMed.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btConsMedActionPerformed(evt);
@@ -68,7 +68,7 @@ public class IntMedico extends javax.swing.JFrame {
         });
 
         btAltMed.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        btAltMed.setText("ALTERA SALARIO");
+        btAltMed.setText("ALTERAR SALARIO");
         btAltMed.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAltMedActionPerformed(evt);
@@ -91,7 +91,7 @@ public class IntMedico extends javax.swing.JFrame {
         });
 
         btImpMed.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        btImpMed.setText("APRESENTA MEDICOS");
+        btImpMed.setText("APRESENTAR MEDICOS");
         btImpMed.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btImpMedActionPerformed(evt);
@@ -99,7 +99,7 @@ public class IntMedico extends javax.swing.JFrame {
         });
 
         btCadMed.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        btCadMed.setText("Cadastrar Medico");
+        btCadMed.setText("CADASTRAR MEDICO");
         btCadMed.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btCadMedActionPerformed(evt);
@@ -126,34 +126,31 @@ public class IntMedico extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(95, 95, 95)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(rotCrm)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(cxCrm, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(rotMenuMed)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(37, 37, 37)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(btCadMed, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btConsMed, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btDelMed, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(btAltMed, javax.swing.GroupLayout.Alignment.TRAILING))))
-                        .addGap(15, 15, 15))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btSair)))
+                        .addComponent(btSair))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btConsMed, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btImpMed, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btAltMed, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                            .addComponent(btDelMed, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(15, 15, 15)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btImpMed)
-                .addGap(113, 113, 113))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(rotMenuMed)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(rotCrm)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(cxCrm)
+                            .addComponent(btCadMed, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(117, 117, 117))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,19 +158,19 @@ public class IntMedico extends javax.swing.JFrame {
                 .addComponent(rotMenuMed)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rotCrm)
-                    .addComponent(cxCrm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                    .addComponent(cxCrm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rotCrm))
+                .addGap(32, 32, 32)
+                .addComponent(btCadMed)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btCadMed)
+                    .addComponent(btConsMed)
                     .addComponent(btAltMed))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btConsMed)
+                    .addComponent(btImpMed)
                     .addComponent(btDelMed))
-                .addGap(18, 18, 18)
-                .addComponent(btImpMed)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addComponent(btSair)
                 .addContainerGap())
         );

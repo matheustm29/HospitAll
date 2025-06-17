@@ -53,6 +53,7 @@ View\IntEstagiario$6.class
 Model\Humano.class
 View\IntEstagiario$3.class
 View\ImpPac$2.class
+View\PrincipalP$6.class
 Model\MedicoDAO.class
 Model\DoencaDAO.class
 Model\EstagiarioDAO.class
