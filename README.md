@@ -1,6 +1,6 @@
 # 🏥 HospitAll - Sistema de Gerenciamento Hospitalar
 <p align="center">
-  <img src="banner.jpeg" alt="HospitAll Banner" width="50%">
+  <img src="Docs/banner.jpeg" alt="HospitAll Banner" width="50%">
 </p>
 
 HospitAll é um sistema desenvolvido com foco na otimização das operações administrativas de unidades de saúde. A aplicação centraliza o cadastro e controle de **pacientes**, **médicos** e **estagiários**, promovendo uma gestão eficiente e moderna por meio de um **Prontuário Eletrônico** simples e funcional.
